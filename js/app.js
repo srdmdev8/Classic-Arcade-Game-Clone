@@ -17,6 +17,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     var distance = 100 * dt;
     Enemy += distance;
+    this.loc++;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -28,7 +29,7 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(loc) {
-    var obj =
+    this.loc = loc;
     this.sprite = 'images/char-boy.png';
 };
 
@@ -48,9 +49,12 @@ var allEnemies = [],
 
 var bug = new Enemy(1);
     bug1 = new Enemy(1);
-    bug2 = new Enemy(1);
-    bug3 = new Enemy(9);
+    bug2 = new Enemy(2);
+    bug3 = new Enemy(2);
 bug.update();
+bug1.update();
+bug2.update();
+bug3.update();
 allEnemies.push(bug, bug1, bug2, bug3);
 
 
