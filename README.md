@@ -1,5 +1,4 @@
 # FEND Arcade Game Clone
-===============================
 
 ## Installation
 
@@ -29,6 +28,6 @@ The directional buttons will move your player on the game board:
 
 - You will start with **3 lives** and **score 0**
 - If a bug _hits_ you, you lose 1 life and your character is placed back at the starting position
-- If you lose all lives _(lives = 0)_ and you get hit by another bug, the **game is over**
+- If you lose all lives _(lives = 0)_ and you get _hit_ by another bug, the **game is over**
 - Every time you reach the water without being _hit_ by a bug, you get 1 point
 - If you reach a score of 10 without losing all lives, you **win the game**
