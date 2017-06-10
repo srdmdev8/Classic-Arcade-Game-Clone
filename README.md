@@ -1,6 +1,34 @@
-frontend-nanodegree-arcade-game
+# FEND Arcade Game Clone
 ===============================
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+## Installation
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+- Download the game's ZIP file [here](https://github.com/srdmdev8/Classic-Arcade-Game-Clone)
+  - Select **Clone or download**
+  - Then select **Download ZIP**
+- Save the ZIP file in desired location on your computer
+- Unzip/extract all files
+- Open the **game.html** file
+  - Double-click the file to open in your computer's default browser or
+  - Right-click the file and choose **Open** or **Open with..**
+    - _Open with.. will allow you to choose the application you would like to open the file with_
+
+## How to Play
+
+The goal of this game is to make your way to the water without coming in contact with any bugs.
+
+### Instructions
+
+The directional buttons will move your player on the game board:
+- The **Up** arrow moves your player up
+- The **Down** arrow moves your player down
+- The **Right** arrow moves your player right
+- The **Left** arow moves your player left
+
+### Rules
+
+- You will start with **3 lives** and **score 0**
+- If a bug _hits_ you, you lose 1 life and your character is placed back at the starting position
+- If you lose all lives _(lives = 0)_ and you get hit by another bug, the **game is over**
+- Every time you reach the water without being _hit_ by a bug, you get 1 point
+- If you reach a score of 10 without losing all lives, you **win the game**
