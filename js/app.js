@@ -1,43 +1,13 @@
-// Get the modal
-var modal = document.getElementById('charModal');
-
-// When the window loads, open the modal
-$(window).on('load', function() {
-    $('#charModal').modal('show');
-});
-
-//event listeners to select specific sprite
-$(document).on("click", "#boy", function(){
-    player.sprite = "images/char-boy.png";
-    $("#charModal").modal("hide");
-});
-
-$(document).on("click", "#cat", function(){
-    player.sprite = "images/char-cat-girl.png";
-    $("#charModal").modal("hide");
-});
-
-$(document).on("click", "#horn", function(){
-    player.sprite = "images/char-horn-girl.png";
-    $("#charModal").modal("hide");
-});
-
-$(document).on("click", "#pink", function(){
-    player.sprite = "images/char-pink-girl.png";
-    $("#charModal").modal("hide");
-});
-
-$(document).on("click", "#princess", function(){
-    player.sprite = "images/char-princess-girl.png";
-    $("#charModal").modal("hide");
-});
+//Invoking strict mode for entire script.
+function strict() {
+    "use strict";
+}
 
 // Enemies our player must avoid
 var Enemy = function(x, y) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
     this.x = x;
     this.y = y;
+    //Randomly generates enemy speed.
     this.speed = Math.floor(Math.random() * 200);
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -52,7 +22,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x += this.speed * dt;
     if (this.x > 600) {
-      this.x = -100;
+        this.x = -100;
     }
 };
 
@@ -70,17 +40,15 @@ Enemy.prototype.render = function() {
 var Player = function(x, y) {
     this.x = x;
     this.y = y;
-    /*this.sprite = ['images/char-boy.png','images/char-princess-girl.png','images/char-pink-girl.png',
-    'images/char-horn-girl.png','images/char-cat-girl.png'];*/
     this.sprite = 'images/char-boy.png';
 };
 
 //This function handles player movement, collision detection, and when the player
 //wins by reaching the water blocks by calling the necessary functions.
 Player.prototype.update = function(dt) {
-    player.handleInput();
-    player.checkCollisions();
-    player.win();
+    this.handleInput();
+    this.checkCollisions();
+    this.win();
 };
 
 //This function draws the player image on the screen.
@@ -91,27 +59,30 @@ Player.prototype.render = function() {
 //This function handles the input by the user using the arrow keys.
 Player.prototype.handleInput = function(move) {
     switch (move) {
-      case 'left': if (this.x - 100 >= 0) {
-        this.x -= 100;
-      }
-      break;
+        case 'left':
+            if (this.x - 100 >= 0) {
+                this.x -= 100;
+            }
+            break;
 
-      case 'up': if (this.y - 75 >= -80) {
-        this.y -= 80;
-      }
-      break;
+        case 'up':
+            if (this.y - 75 >= -80) {
+                this.y -= 80;
+            }
+            break;
 
-      case 'right': if (this.x + 100 < 500) {
-        this.x += 100;
-      }
-      break;
+        case 'right':
+            if (this.x + 100 < 500) {
+                this.x += 100;
+            }
+            break;
 
-      case 'down': if (this.y + 75 <= 385) {
-        this.y += 80;
-      }
-      break;
+        case 'down':
+            if (this.y + 75 <= 385) {
+                this.y += 80;
+            }
+            break;
     }
-    console.log(move);
 };
 
 //This function detects collisions with the player and the enemies(bugs) as well
@@ -122,22 +93,21 @@ Player.prototype.checkCollisions = function() {
             this.x < allEnemies[i].x + 60 &&
             this.y + 50 >= allEnemies[i].y &&
             this.y < allEnemies[i].y + 40) {
-                player.resetPlayer();
-                console.log("You got hit!");
-                if (lives > 0) {
-                    lives -= 1;
-                    console.log("Lives " + lives);
-                    var livesUpdate = document.getElementById("lives");
-                    livesUpdate.textContent = livesIndicator.replace("%data%", lives);
-                }
-                else if (lives <= 0) {
-                    alert('You lost....\n\nGame Over!!');
-                    console.log("Game Over");
-                    player.resetGame();
-                }
+            this.resetPlayer();
+            console.log("You got hit!");
+            if (lives > 0) {
+                lives -= 1;
+                console.log("Lives " + lives);
+                var livesUpdate = document.getElementById("lives");
+                livesUpdate.textContent = livesIndicator.replace("%data%", lives);
+            } else if (lives <= 0) {
+                alert('You lost....\n\nGame Over!!');
+                console.log("Game Over");
+                this.resetGame();
             }
         }
-    };
+    }
+};
 
 
 //This function resets the player's position
@@ -150,10 +120,10 @@ Player.prototype.resetPlayer = function() {
 //and score, and displays the modal so that the user can choose another character
 //for the next game.
 Player.prototype.resetGame = function() {
-    player.resetPlayer();
+    this.resetPlayer();
     allEnemies.forEach(function(enemy) {
-      enemy.reset();
-      enemy.x = -300;
+        enemy.reset();
+        enemy.x = -300;
     });
     lives = 3;
     score = 0;
@@ -171,30 +141,30 @@ Player.prototype.resetGame = function() {
 Player.prototype.win = function() {
     if (this.y <= -15) {
         alert("You reached the water!!");
-        player.resetPlayer();
+        this.resetPlayer();
         score += 1;
         //player.score();
         console.log("You reached the water!!");
         console.log("Score: " + score);
-        scoreUpdate = document.getElementById("score");
+        var scoreUpdate = document.getElementById("score");
         scoreUpdate.textContent = scoreIndicator.replace("%data%", score);
     }
 
     if (score >= 10) {
         alert("YOU WON!!!\n\nYOU BEAT THE BUGS!!!");
-        player.resetGame();
+        this.resetGame();
     }
 };
 
 //Initialize player lives and display on the scoreboard.
-var lives = 3;
-    livesIndicator = "Lives: %data%";
+var lives = 3,
+    livesIndicator = "Lives: %data%",
     livesDisplay = document.getElementById("lives");
 livesDisplay.textContent = livesIndicator.replace('%data%', lives);
 
 //Initialize player score and display on the scoreboard.
-var score = 0;
-    scoreIndicator = "Score: %data%";
+var score = 0,
+    scoreIndicator = "Score: %data%",
     scoreDisplay = document.getElementById("score");
 scoreDisplay.textContent = scoreIndicator.replace("%data%", score);
 
@@ -205,13 +175,47 @@ scoreDisplay.textContent = scoreIndicator.replace("%data%", score);
 var allEnemies = [],
     player = new Player(200, 385);
 
-var bug = new Enemy(-100, 60);
-    bug1 = new Enemy(-200, 145);
-    bug2 = new Enemy(-400, 225);
-    bug3 = new Enemy(-300, 225);
+var bug = new Enemy(-100, 60),
+    bug1 = new Enemy(-200, 145),
+    bug2 = new Enemy(-400, 225),
+    bug3 = new Enemy(-300, 225),
     bug4 = new Enemy(-600, 60);
 
 allEnemies.push(bug, bug1, bug2, bug3, bug4);
+
+// Get the modal
+var modal = document.getElementById('charModal');
+
+// When the window loads, open the modal
+$(window).on('load', function() {
+    $('#charModal').modal('show');
+});
+
+//event listeners to select specific sprite
+$(document).on("click", "#boy", function() {
+    player.sprite = "images/char-boy.png";
+    $("#charModal").modal("hide");
+});
+
+$(document).on("click", "#cat", function() {
+    player.sprite = "images/char-cat-girl.png";
+    $("#charModal").modal("hide");
+});
+
+$(document).on("click", "#horn", function() {
+    player.sprite = "images/char-horn-girl.png";
+    $("#charModal").modal("hide");
+});
+
+$(document).on("click", "#pink", function() {
+    player.sprite = "images/char-pink-girl.png";
+    $("#charModal").modal("hide");
+});
+
+$(document).on("click", "#princess", function() {
+    player.sprite = "images/char-princess-girl.png";
+    $("#charModal").modal("hide");
+});
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
